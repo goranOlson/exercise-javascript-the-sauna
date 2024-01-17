@@ -1,25 +1,26 @@
+let userMessage = 'Select temperature for the sauna (in Fahrenheit)';
 let input;
-let message = 'Select temperature (Fahrenheit)';
-let fahrenheit;
-let celsius;
+let tempFahrenheit;
+let tempCelsius;
 
 do {
-    // Ask for temperature (fahrenheit)
-    input = prompt(message);
-    fahrenheit = parseInt(input);
-    // Get temperature in Celsius
-    celsius = fahrenheitToCelsius(fahrenheit);
-    // Produce user message if needed
-    message = createMessage(fahrenheit, celsius);
-} while (message);
+    // Ask user for temperature in fahrenheit
+    input = prompt(userMessage);
+    tempFahrenheit = parseInt(input);
 
-// Responce to the user
-message = `Temperature ${input} degrees Fahrenheit`;
-alert(message + ' is good!');
+    // Get temperature in Celsius
+    tempCelsius = fahrenheitToCelsius(tempFahrenheit);
+
+    // Produce user message if needed, else undefined
+    userMessage = createMessage(tempFahrenheit, tempCelsius);
+} while (userMessage);
+
+// Respons to the user
+userMessage = `Temperature ${input} degrees Fahrenheit is good!`;
+alert(userMessage);
 
 // Log data
-message += ` (~ ${celsius.toFixed(1)} celsius) is accepted`;
-console.log(message);
+console.log(`Temperature set to ${tempCelsius.toFixed()} degrees celsius (~ ${input} degrees Fahrenheit)`);
 
 
 function fahrenheitToCelsius(f) {
@@ -35,6 +36,8 @@ function createMessage(fahrenheit, celsius) {
         response = `${fahrenheit} degrees Fahrenheit is to low temperature, please increase`;
     } else if (celsius > 77) {
         response = `${fahrenheit} degrees Fahrenheit is to high temperature, please decrease`;
+    } else {
+        response = '';
     }
     // console.log(`createMessage(${celsius}) => '${response}'`);
 
